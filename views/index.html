@@ -1,0 +1,63 @@
+{if="$success != '' "}
+        <div class="div-statusbar status-success">
+            <span class="statusbar-msg"><i class="fa-solid fa-triangle-exclamation"></i> {$success}</span>
+            <span class="close-statusbar" onclick="closestatusbar();"><i class="fas fa-times"></i></span>
+        </div>
+{/if}
+<header class="header">
+    <h1 class="title">Listagem de Tarefas</h1>
+</header>
+<main class="main">
+    <div class="header-options">
+        <div class="btn-options">
+            <a href="/areacolaboradores" class="btn btn-medium btn-blue"><i class="fa-solid fa-users"></i> Área de Colaboradores</a>
+            <a href="/novatarefa" class="btn btn-medium btn-green"><i class="fa-solid fa-list-check"></i> Nova
+                Tarefa</a>
+        </div>
+        <form action="/" class="form-search">
+            <input type="text" class="input-search" placeholder="Prioridade, colaborador ou prazo" value="{$search}" name="search">
+            <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+    </div>
+    <section class="section">
+        <table class="table">
+            <thead class="thead">
+                <tr class="th">
+                    <th class="td">#</th>
+                    <th class="td">Responsável</th>
+                    <th class="td">Prioridade</th>
+                    <th class="td">Data Prazo</th>
+                    <th class="td">Descrição</th>
+                    <th class="td">Ações</th>
+                </tr>
+            </thead>
+            <tfoot>
+
+            </tfoot>
+            <tbody>
+                {loop="$taskslist"}
+                <tr class="tr">
+                    <td class="td">{$value.idtarefa}</td>
+                    <td class="td">{$value.nome}</td>
+                    <td class="td">{$value.prioridade}</td>
+                    <td class="td">{function="formatDate($value.prazolimite)"}</td>
+                    <td class="td">{$value.descricao}</td>
+                    <td class="td td-btns">
+                        <a class="btn btn-min btn-red" href="/{$value.idtarefa}/excluir" onclick="return confirm('Deseja realmente excluir a tarefa ?')"><i class="fa-solid fa-trash-can"></i> Excluir</a>
+                    </td>
+                </tr>
+                {/loop}
+                {if="$taskslist == []"}
+                <tr class="tr">
+                    <td colspan="6" class="td">Não há dados cadastrados</td>
+                </tr>
+                {/if}
+            </tbody>
+        </table>
+        <div class="pagination">
+            {loop="$pages"}
+            <a class="page" href="{$value.href}">{$value.text}</a>
+            {/loop}
+        </div>
+    </section>
+</main>

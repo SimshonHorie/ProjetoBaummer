@@ -1,0 +1,66 @@
+{if="$success != '' "}
+<div class="div-statusbar status-success">
+    <span class="statusbar-msg"><i class="fa-solid fa-triangle-exclamation"></i> {$success}</span>
+    <span class="close-statusbar" onclick="closestatusbar();"><i class="fas fa-times"></i></span>
+</div>
+{/if}
+<header class="header">
+    <h1 class="title">Área de Colaboradores</h1>
+</header>
+<main class="main">
+    <div class="header-options">
+        <div class="btn-options">
+            <a href="/areacolaboradores/novocolaborador" class="btn btn-medium btn-green"><i
+                    class="fa-solid fa-user-plus"></i> Cadastrar Colaborador</a>
+            <a href="/" class="btn btn-medium btn-blue"><i class="fa-solid fa-list-check"></i> Tarefas</a>
+        </div>
+        <form action="/areacolaboradores" class="form-search">
+            <input type="text" class="input-search" placeholder="Pesquisar por Nome" name="search" value="{$search}">
+            <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+    </div>
+    <section class="section">
+        <table class="table">
+            <thead class="thead">
+                <tr class="th">
+                    <th class="td">#</th>
+                    <th class="td">Nome</th>
+                    <th class="td">CPF</th>
+                    <th class="td">Email</th>
+                    <th class="td">Ações</th>
+                </tr>
+            </thead>
+            <tfoot>
+
+            </tfoot>
+            <tbody>
+                {loop="$employeeslist"}
+                <tr class="tr">
+                    <td class="td">{$value.id}</td>
+                    <td class="td">{$value.nome}</td>
+                    <td class="td">{$value.cpf}</td>
+                    <td class="td">{$value.email}</td>
+                    <td class="td td-btns">
+                        <a class="btn btn-min btn-blue" href="/areacolaboradores/{$value.id}/editarcolaborador"><i
+                                class="fa-solid fa-pen-to-square"></i> Editar</a>
+                        <a class="btn btn-min btn-red" href="/areacolaboradores/{$value.id}/excluir"
+                            onclick="return confirm('Deseja realmente excluir o colaborador {$value.nome} ?')"><i
+                                class="fa-solid fa-trash-can"></i> Excluir</a>
+                    </td>
+                </tr>
+                {/loop}
+                {if="$employeeslist == []"}
+                <tr class="tr">
+                    <td colspan="6" class="td">Não há dados cadastrados</td>
+                </tr>
+                {/if}
+            </tbody>
+
+        </table>
+        <div class="pagination">
+            {loop="$pages"}
+            <a class="page" href="{$value.href}">{$value.text}</a>
+            {/loop}
+        </div>
+    </section>
+</main>
