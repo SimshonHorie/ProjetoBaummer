@@ -15,3 +15,5 @@ renomeie a pasta do projeto no xampp para "projetotarefas"
 Após isso vá na pasta "Banco de Dados" e cole o Sql no phpMyAdmin
 
 As classes do projeto se encontram em "\vendor\dist\src"
+
+No campo cpf, coloquei apenas cpf válidos, portanto, tem que ir no site gerador de cpf, para poder validar e conseguir fazer o cadastro
